@@ -1,14 +1,15 @@
 {
-	"required": true,
-	"package": "com.joel4848.visibleghosts.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
-	}
+  "required": true,
+  "package": "com.joel4848.visibleghosts.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinRenderLivingBase",
+    "MixinInvisibilityAlphaClient"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
 }

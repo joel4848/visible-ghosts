@@ -1,34 +1,29 @@
 {
-	"schemaVersion": 1,
-	"id": "visible-ghosts",
-	"version": "${version}",
-	"name": "visible-ghosts",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/visible-ghosts/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"com.joel4848.visibleghosts.Visibleghosts"
-		]
-	},
-	"mixins": [
-		"visible-ghosts.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.17.3",
-		"minecraft": "~1.21.1",
-		"java": ">=21",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
-	}
+  "schemaVersion": 1,
+  "id": "visible-ghosts",
+  "version": "${version}",
+  "name": "visible-ghosts",
+  "description": "Render invisible players for the client user and allow configurable ghost transparency.",
+  "authors": [
+    "Joel4848"
+  ],
+  "contact": {
+    "homepage": "https://github.com/joel4848"
+  },
+  "license": "CC BY-NC-SA 4.0",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.joel4848.visibleghosts.client.VisibleGhostsClient"
+    ]
+  },
+  "mixins": [
+    "visible-ghosts.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
 }
