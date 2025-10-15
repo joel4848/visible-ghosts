@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.joel4848.visibleghosts.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"ExampleMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
