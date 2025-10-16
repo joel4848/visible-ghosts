@@ -3,18 +3,24 @@
   "id": "visible-ghosts",
   "version": "${version}",
   "name": "visible-ghosts",
-  "description": "Render invisible players for the client user and allow configurable ghost transparency.",
+  "description": "Renders invisible players as if you were on their team/in spectator mode, and makes them easier to see",
   "authors": [
     "Joel4848"
   ],
   "contact": {
-    "homepage": "https://github.com/joel4848"
+    "homepage": "https://github.com/joel4848",
+    "sources": "https://github.com/joel4848/visible-ghosts",
+    "issues": "https://github.com/joel4848/visible-ghosts/issues"
   },
-  "license": "CC BY-NC-SA 4.0",
+  "license": "CC BY-NC SA 4.0",
+  "icon": "assets/joel4848/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
       "com.joel4848.visibleghosts.VisibleGhostsClient"
+    ],
+    "modmenu": [
+      "com.joel4848.visibleghosts.config.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -25,5 +31,14 @@
     "minecraft": "~1.21.1",
     "java": ">=21",
     "fabric-api": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.issues": "https://github.com/joel4848/visible-ghosts/issues",
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/visible-ghosts",
+        "modmenu.modrinth": "https://modrinth.com/mod/visible-ghosts"
+      }
+    }
   }
 }
