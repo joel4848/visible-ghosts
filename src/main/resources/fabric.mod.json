@@ -14,7 +14,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.joel4848.visibleghosts.client.VisibleGhostsClient"
+      "com.joel4848.visibleghosts.VisibleGhostsClient"
     ]
   },
   "mixins": [
