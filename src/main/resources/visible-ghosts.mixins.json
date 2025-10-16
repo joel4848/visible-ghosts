@@ -3,7 +3,8 @@
   "package": "com.joel4848.visibleghosts.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "MixinInvisibilityAlpha"
+    "MixinInvisibilityAlpha",
+    "MixinInvisibilityEntity"
   ],
   "injectors": {
     "defaultRequire": 1
