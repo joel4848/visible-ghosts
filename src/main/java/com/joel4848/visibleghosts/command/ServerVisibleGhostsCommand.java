@@ -15,40 +15,20 @@ import net.minecraft.util.Formatting;
 
 import java.util.Collection;
 
-/**
- * Registers the server-side sub-command:
- *
- *   /visibleghosts overrideVisibility <targets> <visible|invisible|none>
- *
- * Permission level: 1 (operator-like; the lowest OP tier).
- *
- * <ul>
- *   <li>{@code visible}   – force the targeted player(s) to see invisible players as transparent,
- *                           regardless of their own client settings.</li>
- *   <li>{@code invisible} – force the targeted player(s) to see invisible players as fully
- *                           invisible, regardless of their own client settings.</li>
- *   <li>{@code none}      – clear the server override; the player's own client setting takes
- *                           effect again (or vanilla behaviour if they don't have the mod).</li>
- * </ul>
- *
- * The override is pushed to the client immediately via a custom S2C packet.
- * If the targeted player's client does not have the mod installed, the packet
- * is silently ignored and the override has no visual effect on their end.
- */
 public final class ServerVisibleGhostsCommand {
 
-    /**
-     * Registers the command via {@link CommandRegistrationCallback}.
-     * Call this from the server mod initializer.
-     */
     public static void register() {
         CommandRegistrationCallback.EVENT.register(
-                (dispatcher, registryAccess, environment) -> registerCommand(dispatcher));
+                (dispatcher, registryAccess, environment) -> {
+                    registerUnder(dispatcher, "visibleghostsadmin");
+                    registerUnder(dispatcher, "vga");
+                });
     }
 
-    private static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
+    private static void registerUnder(CommandDispatcher<ServerCommandSource> dispatcher,
+                                      String root) {
         dispatcher.register(
-                CommandManager.literal("visibleghostsadmin")
+                CommandManager.literal(root)
                         .requires(source -> source.hasPermissionLevel(1))
                         .then(CommandManager.literal("overrideVisibility")
                                 .then(CommandManager.argument("targets", EntityArgumentType.players())
@@ -71,11 +51,9 @@ public final class ServerVisibleGhostsCommand {
 
         for (ServerPlayerEntity player : targets) {
             OverrideManager.setOverride(player.getUuid(), state);
-            // Push the new state to the player's client immediately.
             ServerNetworking.sendOverrideTo(player, state);
         }
 
-        // Feedback to the command sender.
         String stateLabel = switch (state) {
             case VISIBLE   -> "visible (transparent)";
             case INVISIBLE -> "invisible (fully hidden)";

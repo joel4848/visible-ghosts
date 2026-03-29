@@ -15,8 +15,15 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.lit
 public class VisibleGhostsCommand {
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
+        // Build the sub-command tree once and register it under both aliases.
+        registerUnder(dispatcher, "visibleghosts");
+        registerUnder(dispatcher, "vg");
+    }
+
+    private static void registerUnder(CommandDispatcher<FabricClientCommandSource> dispatcher,
+                                      String root) {
         dispatcher.register(
-                literal("visibleghosts")
+                literal(root)
                         .then(literal("renderInvisiblePlayers")
                                 .executes(VisibleGhostsCommand::getRenderInvisiblePlayers)
                                 .then(argument("true|false", BoolArgumentType.bool())
@@ -27,6 +34,8 @@ public class VisibleGhostsCommand {
                                         .executes(VisibleGhostsCommand::setGhostTransparency)))
         );
     }
+
+    // ── renderInvisiblePlayers ────────────────────────────────────────────────
 
     private static int getRenderInvisiblePlayers(CommandContext<FabricClientCommandSource> context) {
         boolean enabled = ModConfig.getInstance().isRenderInvisiblePlayers();
@@ -52,6 +61,8 @@ public class VisibleGhostsCommand {
         context.getSource().sendFeedback(message);
         return 1;
     }
+
+    // ── ghostTransparency ─────────────────────────────────────────────────────
 
     private static int getGhostTransparency(CommandContext<FabricClientCommandSource> context) {
         int value = ModConfig.getInstance().getGhostTransparency();
