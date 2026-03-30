@@ -33,6 +33,9 @@ dependencies {
 
     // ModMenu
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+    modImplementation "me.lucko:fabric-permissions-api:0.6.1"
+    include "me.lucko:fabric-permissions-api:0.6.1"
 }
 
 processResources {

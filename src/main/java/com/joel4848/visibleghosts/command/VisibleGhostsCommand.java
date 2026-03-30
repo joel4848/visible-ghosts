@@ -12,11 +12,27 @@ import net.minecraft.util.Formatting;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
+/**
+ * Registers the client-side commands for Visible Ghosts.
+ * Available to all players regardless of server-side permissions.
+ *
+ * Roots: /visibleghosts  and  /vg  (both do the same thing)
+ *
+ * Sub-commands:
+ *   renderInvisiblePlayers [true|false]
+ *   ghostTransparency      [0-255]
+ */
 public class VisibleGhostsCommand {
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
+        registerUnder(dispatcher, "visibleghosts");
+        registerUnder(dispatcher, "vg");
+    }
+
+    private static void registerUnder(CommandDispatcher<FabricClientCommandSource> dispatcher,
+                                      String root) {
         dispatcher.register(
-                literal("visibleghosts")
+                literal(root)
                         .then(literal("renderInvisiblePlayers")
                                 .executes(VisibleGhostsCommand::getRenderInvisiblePlayers)
                                 .then(argument("true|false", BoolArgumentType.bool())
@@ -27,6 +43,8 @@ public class VisibleGhostsCommand {
                                         .executes(VisibleGhostsCommand::setGhostTransparency)))
         );
     }
+
+    // ── renderInvisiblePlayers ────────────────────────────────────────────────
 
     private static int getRenderInvisiblePlayers(CommandContext<FabricClientCommandSource> context) {
         boolean enabled = ModConfig.getInstance().isRenderInvisiblePlayers();
@@ -52,6 +70,8 @@ public class VisibleGhostsCommand {
         context.getSource().sendFeedback(message);
         return 1;
     }
+
+    // ── ghostTransparency ─────────────────────────────────────────────────────
 
     private static int getGhostTransparency(CommandContext<FabricClientCommandSource> context) {
         int value = ModConfig.getInstance().getGhostTransparency();
